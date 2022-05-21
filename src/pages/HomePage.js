@@ -1,7 +1,10 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from '../assets/logo.svg';
+import './home.css';
+import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function App() {
+
+function HomePage() {
   return (
     <div className="App">
       <header className="App-header">
@@ -9,6 +12,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
+        <Button>This is Button!</Button>
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -22,4 +26,4 @@ function App() {
   );
 }
 
-export default App;
+export default HomePage;
