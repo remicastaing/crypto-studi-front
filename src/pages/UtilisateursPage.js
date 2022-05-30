@@ -1,5 +1,5 @@
 import React from 'react';
-import Table from 'react-bootstrap/table'
+import Table from 'react-bootstrap/Table'
 import FormUtilisateur from "../components/FormUtilisateur";
 
 class UtilisateursPage extends React.Component {
