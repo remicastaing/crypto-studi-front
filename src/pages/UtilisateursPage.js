@@ -13,7 +13,7 @@ class UtilisateursPage extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://127.0.0.1:80/utilisateurs/")
+        fetch(process.env.REACT_APP_API_BASE_URL + "utilisateurs/")
             .then(res => res.json())
             .then(
                 (result) => {
