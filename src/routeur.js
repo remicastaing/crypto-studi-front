@@ -9,6 +9,7 @@ import HomePage from './pages/HomePage';
 import OperationPage from './pages/OperationPage'
 import VentilationPage from "./pages/VentilationPage";
 import UtilisateursPage from './pages/UtilisateursPage';
+import UtilisateurDetailsPage  from "./pages/UtilisateurDetailsPage";
 import TrinomePage from "./pages/TrinomePage";
 
 class Routeur extends React.Component {
@@ -19,6 +20,7 @@ class Routeur extends React.Component {
             <Route path="operation" element={<OperationPage />} />
             <Route path="trinome" element={<TrinomePage />} />
             <Route path="ventilation" element={<VentilationPage />} />
+            <Route path="utilisateurs/:id" element={<UtilisateurDetailsPage />} />
             <Route path="utilisateurs" element={<UtilisateursPage />} />
         </Routes>
     }

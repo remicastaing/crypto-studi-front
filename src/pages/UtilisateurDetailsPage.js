@@ -1,17 +1,20 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Table from 'react-bootstrap/Table'
 import FormUtilisateur from "../components/FormUtilisateur";
 import { APIService } from "../services/api";
 
-function UtilisateursPage(props) {
-    let navigate = useNavigate();
-    return <UtilisateursPageWithNavigate {...props} navigate={navigate} />
+const UtilisateurDetailPage = (props) => {
+    const params = useParams();
+    return <WrappedUtilisateurDetailPage  {...{ ...props, match: { params } }} />
 }
 
-class UtilisateursPageWithNavigate extends React.Component {
+
+class WrappedUtilisateurDetailPage extends React.Component {
+
     constructor(props) {
         super(props);
+
         this.state = {
             error: null,
             isLoaded: false,
@@ -20,12 +23,13 @@ class UtilisateursPageWithNavigate extends React.Component {
     }
 
     componentDidMount() {
-        APIService.getUtilisateurs()
+        const { id } = this.props.match.params;
+        APIService.getUtilisateur(id)
             .then(
                 (result) => {
                     this.setState({
                         isLoaded: true,
-                        utilisateurs: result
+                        utilisateur: result
                     });
                 },
                 (error) => {
@@ -37,12 +41,9 @@ class UtilisateursPageWithNavigate extends React.Component {
             )
     }
 
-    open = async (id) => {
-        this.props.navigate('/utilisateurs/' + id);
-    }
 
     render() {
-        const { error, isLoaded, utilisateurs } = this.state;
+        const { error, isLoaded, utilisateur } = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
@@ -59,16 +60,13 @@ class UtilisateursPageWithNavigate extends React.Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {utilisateurs.map(utilisateur => (
-                                <tr key={utilisateur.id} onClick={(e) => this.open(utilisateur.id)}>
-                                    <td>{utilisateur.prenom}</td>
-                                    <td>{utilisateur.nom}</td>
-                                    <td>{utilisateur.email}</td>
-                                </tr>
-                            ))}
+                            <tr key={utilisateur.id}>
+                                <td>{utilisateur.prenom}</td>
+                                <td>{utilisateur.nom}</td>
+                                <td>{utilisateur.email}</td>
+                            </tr>
                         </tbody>
                     </Table>
-                    <FormUtilisateur />
                 </div>
             );
         }
@@ -76,4 +74,4 @@ class UtilisateursPageWithNavigate extends React.Component {
 }
 
 
-export default UtilisateursPage
+export default UtilisateurDetailPage
