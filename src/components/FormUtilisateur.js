@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-
+import { APIService } from "../services/api";
 function FormUtilisateurs() {
 
     const [prenom, setPrenom] = useState(null);
@@ -16,17 +16,7 @@ function FormUtilisateurs() {
         e.preventDefault();
 
         try {
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    prenom: prenom,
-                    nom: nom,
-                    email: email,
-                })
-            };
-            const response = await fetch('http://127.0.0.1:80/utilisateurs/', requestOptions);
-            const data = await response.json();
+            const data = await APIService.createUtilisateur(prenom, nom, email)
             if (data.status === 200) {
                 setMessage("L'utilisateur a été créé.");
             } else {

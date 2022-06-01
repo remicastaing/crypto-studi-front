@@ -1,4 +1,4 @@
-import React, {useState, useEffect}  from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Table from 'react-bootstrap/Table'
 import FormUtilisateur from "../components/FormUtilisateur";
@@ -26,7 +26,7 @@ function UtilisateursPage() {
             )
     }, [])
 
-    async function open(id)  {
+    async function open(id) {
         navigate('/utilisateurs/' + id);
     }
 
@@ -36,27 +36,29 @@ function UtilisateursPage() {
         return <div>Loading...</div>;
     } else {
         return (
-            <div>
-                <Table striped bordered hover>
-                    <thead>
-                        <tr>
-                            <th>Prénom</th>
-                            <th>Nom</th>
-                            <th>Email</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {utilisateurs.map(utilisateur => (
-                            <tr key={utilisateur.id} onClick={(e) => open(utilisateur.id)}>
-                                <td>{utilisateur.prenom}</td>
-                                <td>{utilisateur.nom}</td>
-                                <td>{utilisateur.email}</td>
+            <section class="py-5 text-center container">
+                <div>
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>Prénom</th>
+                                <th>Nom</th>
+                                <th>Email</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </Table>
-                <FormUtilisateur />
-            </div>
+                        </thead>
+                        <tbody>
+                            {utilisateurs.map(utilisateur => (
+                                <tr key={utilisateur.id} onClick={(e) => open(utilisateur.id)}>
+                                    <td>{utilisateur.prenom}</td>
+                                    <td>{utilisateur.nom}</td>
+                                    <td>{utilisateur.email}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                    <FormUtilisateur />
+                </div>
+            </section >
         );
     }
 }

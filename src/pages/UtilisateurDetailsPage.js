@@ -37,7 +37,7 @@ function UtilisateurDetailPage() {
         return <div>Loading...</div>;
     } else {
         return (
-            <div>
+            <section class="py-5 text-center container">
                 <Table striped bordered hover>
                     <thead>
                         <tr>
@@ -54,7 +54,7 @@ function UtilisateurDetailPage() {
                         </tr>
                     </tbody>
                 </Table>
-            </div>
+            </section>
         );
     }
 
