@@ -1,76 +1,63 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import Table from 'react-bootstrap/Table'
-import FormUtilisateur from "../components/FormUtilisateur";
+
 import { APIService } from "../services/api";
 
-const UtilisateurDetailPage = (props) => {
-    const params = useParams();
-    return <WrappedUtilisateurDetailPage  {...{ ...props, match: { params } }} />
-}
 
+function UtilisateurDetailPage() {
 
-class WrappedUtilisateurDetailPage extends React.Component {
+    let { id } = useParams();
+    const [error, setError] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [utilisateur, setUtilisateur] = useState(null);
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            error: null,
-            isLoaded: false,
-            utilisateurs: []
-        };
-    }
-
-    componentDidMount() {
-        const { id } = this.props.match.params;
+    useEffect(() => {
+        
         APIService.getUtilisateur(id)
             .then(
                 (result) => {
-                    this.setState({
-                        isLoaded: true,
-                        utilisateur: result
-                    });
+                    setIsLoaded(true);
+                    setUtilisateur(result);
                 },
+                // Remarque : il faut gérer les erreurs ici plutôt que dans
+                // un bloc catch() afin que nous n’avalions pas les exceptions
+                // dues à de véritables bugs dans les composants.
                 (error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    });
+                    setIsLoaded(true);
+                    setError(error);
                 }
             )
-    }
+    }, [])
 
 
-    render() {
-        const { error, isLoaded, utilisateur } = this.state;
-        if (error) {
-            return <div>Error: {error.message}</div>;
-        } else if (!isLoaded) {
-            return <div>Loading...</div>;
-        } else {
-            return (
-                <div>
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th>Prénom</th>
-                                <th>Nom</th>
-                                <th>Email</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr key={utilisateur.id}>
-                                <td>{utilisateur.prenom}</td>
-                                <td>{utilisateur.nom}</td>
-                                <td>{utilisateur.email}</td>
-                            </tr>
-                        </tbody>
-                    </Table>
-                </div>
-            );
-        }
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    } else if (!isLoaded) {
+        return <div>Loading...</div>;
+    } else {
+        return (
+            <div>
+                <Table striped bordered hover>
+                    <thead>
+                        <tr>
+                            <th>Prénom</th>
+                            <th>Nom</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr key={utilisateur.id}>
+                            <td>{utilisateur.prenom}</td>
+                            <td>{utilisateur.nom}</td>
+                            <td>{utilisateur.email}</td>
+                        </tr>
+                    </tbody>
+                </Table>
+            </div>
+        );
     }
+
 }
 
 

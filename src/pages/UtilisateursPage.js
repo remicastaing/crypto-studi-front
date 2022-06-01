@@ -1,77 +1,63 @@
-import React from 'react';
+import React, {useState, useEffect}  from 'react';
 import { useNavigate } from 'react-router-dom';
 import Table from 'react-bootstrap/Table'
 import FormUtilisateur from "../components/FormUtilisateur";
 import { APIService } from "../services/api";
 
-function UtilisateursPage(props) {
+
+function UtilisateursPage() {
+
     let navigate = useNavigate();
-    return <UtilisateursPageWithNavigate {...props} navigate={navigate} />
-}
+    const [error, setError] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [utilisateurs, setUtilisateurs] = useState([]);
 
-class UtilisateursPageWithNavigate extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            error: null,
-            isLoaded: false,
-            utilisateurs: []
-        };
-    }
-
-    componentDidMount() {
+    useEffect(() => {
         APIService.getUtilisateurs()
             .then(
                 (result) => {
-                    this.setState({
-                        isLoaded: true,
-                        utilisateurs: result
-                    });
+                    setIsLoaded(true);
+                    setUtilisateurs(result);
                 },
                 (error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    });
+                    setIsLoaded(true);
+                    setError(error);
                 }
             )
+    }, [])
+
+    async function open(id)  {
+        navigate('/utilisateurs/' + id);
     }
 
-    open = async (id) => {
-        this.props.navigate('/utilisateurs/' + id);
-    }
-
-    render() {
-        const { error, isLoaded, utilisateurs } = this.state;
-        if (error) {
-            return <div>Error: {error.message}</div>;
-        } else if (!isLoaded) {
-            return <div>Loading...</div>;
-        } else {
-            return (
-                <div>
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th>Prénom</th>
-                                <th>Nom</th>
-                                <th>Email</th>
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    } else if (!isLoaded) {
+        return <div>Loading...</div>;
+    } else {
+        return (
+            <div>
+                <Table striped bordered hover>
+                    <thead>
+                        <tr>
+                            <th>Prénom</th>
+                            <th>Nom</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {utilisateurs.map(utilisateur => (
+                            <tr key={utilisateur.id} onClick={(e) => open(utilisateur.id)}>
+                                <td>{utilisateur.prenom}</td>
+                                <td>{utilisateur.nom}</td>
+                                <td>{utilisateur.email}</td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            {utilisateurs.map(utilisateur => (
-                                <tr key={utilisateur.id} onClick={(e) => this.open(utilisateur.id)}>
-                                    <td>{utilisateur.prenom}</td>
-                                    <td>{utilisateur.nom}</td>
-                                    <td>{utilisateur.email}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </Table>
-                    <FormUtilisateur />
-                </div>
-            );
-        }
+                        ))}
+                    </tbody>
+                </Table>
+                <FormUtilisateur />
+            </div>
+        );
     }
 }
 
