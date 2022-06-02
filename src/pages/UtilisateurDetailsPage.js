@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Table from 'react-bootstrap/Table'
 
@@ -13,7 +13,7 @@ function UtilisateurDetailPage() {
     const [utilisateur, setUtilisateur] = useState(null);
 
     useEffect(() => {
-        
+
         APIService.getUtilisateur(id)
             .then(
                 (result) => {
@@ -37,7 +37,7 @@ function UtilisateurDetailPage() {
         return <div>Loading...</div>;
     } else {
         return (
-            <section class="py-5 text-center container">
+            <section class="py-5 container">
                 <Table striped bordered hover>
                     <thead>
                         <tr>

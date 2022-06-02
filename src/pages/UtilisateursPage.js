@@ -36,7 +36,7 @@ function UtilisateursPage() {
         return <div>Loading...</div>;
     } else {
         return (
-            <section class="py-5 text-center container">
+            <section class="py-5 container">
                 <div>
                     <Table striped bordered hover>
                         <thead>

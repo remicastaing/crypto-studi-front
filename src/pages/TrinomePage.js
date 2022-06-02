@@ -34,29 +34,27 @@ function TrinomePage() {
         return <div>Loading...</div>;
     } else {
         return (
-            <section class="py-5 text-center container">
-                <div>
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Couts kilométriques</th>
-                                <th>Couts horaires</th>
-                                <th>Couts journaliers</th>
+            <section className="py-5 container">
+                <Table striped bordered hover>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Couts kilométriques</th>
+                            <th>Couts horaires</th>
+                            <th>Couts journaliers</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {trinomes.map(trinome => (
+                            <tr key={trinome.id} onClick={(e) => open(trinome.id)}>
+                                <td>{trinome.date}</td>
+                                <td>{trinome.couts_kms}</td>
+                                <td>{trinome.couts_horaires}</td>
+                                <td>{trinome.couts_journaliers}</td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            {trinomes.map(trinome => (
-                                <tr key={trinome.id} onClick={(e) => open(trinome.id)}>
-                                    <td>{trinome.date}</td>
-                                    <td>{trinome.couts_kms}</td>
-                                    <td>{trinome.couts_horaires}</td>
-                                    <td>{trinome.couts_journaliers}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </Table>
-                </div>
+                        ))}
+                    </tbody>
+                </Table>
             </section >
         );
     }
