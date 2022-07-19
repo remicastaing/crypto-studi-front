@@ -1,6 +1,6 @@
-import logo from '../assets/logo.svg';
+// import logo from '../assets/logo.svg';
 import './home.css';
-import Button from 'react-bootstrap/Button';
+// import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 

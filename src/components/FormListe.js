@@ -61,6 +61,7 @@ function FormListe({ addliste }) {
                     </Col>
                 </Row>
             </Card.Footer>
+            {message}
         </Card>
     )
 }

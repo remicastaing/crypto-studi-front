@@ -57,7 +57,7 @@ export default function ListeDetailsPage() {
                     console.log(error)
                 }
             )
-    }, [])
+    }, [id])
 
     function openNewTache() {
         setForm('new')

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
-import { BsTrash, BsXSquare } from "react-icons/bs";
+import { BsXSquare } from "react-icons/bs";
 import { APIService } from "../services/api";
 
 
@@ -102,6 +102,7 @@ export default function FormTache({ liste, addtache, cancel, utilisateurs }) {
                     </Col>
                 </Row>
             </Card.Footer>
+            {message}
         </Card>
     )
 }

@@ -14,7 +14,7 @@ function FormUtilisateurs({ addUtilisateur, cancel }) {
     const [nom, setNom] = useState(null);
     const [email, setEmail] = useState(null);
     const [message, setMessage] = useState(null);
-    const [validated, setValidated] = useState(false);
+    const [validated] = useState(false);
 
 
     async function create(e) {
@@ -90,6 +90,7 @@ function FormUtilisateurs({ addUtilisateur, cancel }) {
                     </Col>
                 </Row>
             </Card.Footer>
+            {message}
         </Card>
     )
 

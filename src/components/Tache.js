@@ -9,7 +9,7 @@ import { APIService } from "../services/api";
 
 export default function Tache({ tache, update, del, cancel, utilisateurs }) {
 
-    const [error, setError] = useState(null);
+    const [error] = useState(null);
     const [nom, setNom] = useState(tache.nom);
     const [attribution, setAttribution] = useState(tache.attribution);
     const [statut, setStatut] = useState(tache.statut);

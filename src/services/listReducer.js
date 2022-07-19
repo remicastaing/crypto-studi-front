@@ -16,7 +16,7 @@ export function listReducer(state, action) {
             break;
         case 'update':
             state.forEach((item) => {
-                newState.push(item.id == action.item.id ? action.item : item)
+                newState.push(item.id === action.item.id ? action.item : item)
             })
             break;
         default:
