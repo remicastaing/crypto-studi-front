@@ -2,6 +2,7 @@
 import './home.css';
 // import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {Link} from 'react-router-dom';
 
 
 function HomePage() {
@@ -12,7 +13,8 @@ function HomePage() {
           <h1 className="fw-light">Lalalist</h1>
           <p className="lead text-muted">Mettez vos taches en musiques.</p>
           <p>
-            <a href="/listes/" className="btn btn-primary my-2">Consulter les listes</a>
+            <Link to="/listes" className="btn btn-primary my-2">Consulter les listes</Link>
+
           </p>
         </div>
       </div>
