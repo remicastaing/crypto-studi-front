@@ -34,7 +34,7 @@ export default function ListeDetailsPage() {
                     console.log(error)
                 }
             );
-    })
+    }, [id])
 
 
 

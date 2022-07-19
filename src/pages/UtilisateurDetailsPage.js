@@ -38,7 +38,7 @@ function UtilisateurDetailPage() {
                     setError(error);
                 }
             )
-    });
+    }, [id]);
 
     useEffect(() => {
         APIService.getTachesParUtilisateur(id)
@@ -52,7 +52,7 @@ function UtilisateurDetailPage() {
                     setError(error);
                 }
             );
-    });
+    }, [id]);
 
     useEffect(() => {
         APIService.getListes()
@@ -67,7 +67,7 @@ function UtilisateurDetailPage() {
                 }
             )
 
-    })
+    }, [])
 
     function onSubmit(e) {
         e.preventDefault();
