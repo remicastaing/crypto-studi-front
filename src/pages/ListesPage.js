@@ -1,28 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table'
-import { BsPersonPlus } from "react-icons/bs";
-import FormUtilisateur from "../components/FormUtilisateur";
+import ProgressBar from 'react-bootstrap/ProgressBar'
+import FormListe from "../components/FormListe";
+import { BsJournalPlus } from "react-icons/bs";
 import { APIService } from "../services/api";
+import { listReducer } from "../services/listReducer";
 
-
-function UtilisateursPage() {
+function ListePage() {
 
     let navigate = useNavigate();
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [utilisateurs, setUtilisateurs] = useState([]);
+    const [listes, dispatch] = useReducer(listReducer, []);
     const [formVisible, setFormVisbility] = useState(true);
 
+
     useEffect(() => {
-        APIService.getUtilisateurs()
+        APIService.getListes()
             .then(
                 (result) => {
                     setIsLoaded(true);
-                    setUtilisateurs(result);
+                    dispatch({
+                        type: 'load',
+                        items: result
+                    })
                 },
                 (error) => {
                     setIsLoaded(true);
@@ -31,17 +36,21 @@ function UtilisateursPage() {
             )
     }, [])
 
+
     async function open(id) {
-        navigate('/utilisateurs/' + id);
+        navigate('/liste/' + id);
+    }
+
+    function addListe(liste) {
+        toggleForm()
+        dispatch({
+            type: 'add',
+            item: liste
+        })
     }
 
     function toggleForm() {
         setFormVisbility(!formVisible)
-    }
-
-    function addUtilisateur(utilisateur) {
-        toggleForm()
-        setUtilisateurs(utilisateurs => [...utilisateurs, utilisateur])
     }
 
     if (error) {
@@ -54,24 +63,24 @@ function UtilisateursPage() {
                 <Card>
                     <Card.Header as="h5">
                         <Row>
-                            <Col>Utilisateurs</Col>
+                            <Col>Listes</Col>
                         </Row>
                     </Card.Header>
 
-                    <Table striped bordered hover>
+                    <Table striped hover>
                         <thead>
                             <tr>
-                                <th>Prénom</th>
+                                <th>Date</th>
                                 <th>Nom</th>
-                                <th>Email</th>
+                                <th>Complétion</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {utilisateurs.map(utilisateur => (
-                                <tr key={utilisateur.id} onClick={(e) => open(utilisateur.id)}>
-                                    <td>{utilisateur.prenom}</td>
-                                    <td>{utilisateur.nom}</td>
-                                    <td>{utilisateur.email}</td>
+                            {listes.map(liste => (
+                                <tr key={liste.id} onClick={(e) => open(liste.id)}>
+                                    <td>{liste.date}</td>
+                                    <td>{liste.nom}</td>
+                                    <td><ProgressBar animated now={liste.completion / liste.nb_tache * 100} /></td>
                                 </tr>
                             ))}
                         </tbody>
@@ -80,22 +89,21 @@ function UtilisateursPage() {
                         {formVisible ?
                             <Row>
                                 <Col></Col>
-                                <Col xs="1" lg="1"><BsPersonPlus size={24} onClick={toggleForm} /></Col>
-                            </Row> : <div></div>
+                                <Col xs="1" lg="1"><BsJournalPlus size={24} onClick={toggleForm} /></Col>
+                            </Row> : ''
                         }
                     </Card.Footer>
                 </Card>
                 <br></br>
-
-
                 {!formVisible ?
-                    <FormUtilisateur addUtilisateur={addUtilisateur} cancel={toggleForm} />
+                    <FormListe addliste={addListe} />
                     : ''}
 
             </section >
         );
     }
+
 }
 
 
-export default UtilisateursPage
+export default ListePage
