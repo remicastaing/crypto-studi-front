@@ -5,6 +5,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table'
 import ProgressBar from 'react-bootstrap/ProgressBar'
+import Spinner from 'react-bootstrap/Spinner';
+import Alert from 'react-bootstrap/Alert';
 import FormListe from "../components/FormListe";
 import { BsJournalPlus } from "react-icons/bs";
 import { APIService } from "../services/api";
@@ -54,9 +56,23 @@ function ListePage() {
     }
 
     if (error) {
-        return <div>Error: {error.message}</div>;
+        return (
+            <section className="py-5 container">
+                <center>
+                    <Alert variant='danger'>
+                        Error: {error.message}
+                    </Alert>
+                </center>
+            </section>)
+
+            ;
     } else if (!isLoaded) {
-        return <div>Loading...</div>;
+        return (
+            <section className="py-5 container">
+                <center>
+                    <Spinner animation="border" variant="info" />
+                </center>
+            </section>);
     } else {
         return (
             <section className="py-5 container">

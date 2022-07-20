@@ -4,6 +4,8 @@ import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table'
+import Spinner from 'react-bootstrap/Spinner';
+import Alert from 'react-bootstrap/Alert';
 import { BsPersonPlus } from "react-icons/bs";
 import FormUtilisateur from "../components/FormUtilisateur";
 import { APIService } from "../services/api";
@@ -45,9 +47,23 @@ function UtilisateursPage() {
     }
 
     if (error) {
-        return <div>Error: {error.message}</div>;
+        return (
+            <section className="py-5 container">
+                <center>
+                    <Alert variant='danger'>
+                        Error: {error.message}
+                    </Alert>
+                </center>
+            </section>)
+
+            ;
     } else if (!isLoaded) {
-        return <div>Loading...</div>;
+        return (
+            <section className="py-5 container">
+                <center>
+                    <Spinner animation="border" variant="info" />
+                </center>
+            </section>);
     } else {
         return (
             <section className="py-5 container">

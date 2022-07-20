@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Spinner from 'react-bootstrap/Spinner';
+import Alert from 'react-bootstrap/Alert';
 import { APIService } from "../services/api";
 import ListeTaches from "../components/ListeTaches";
 
@@ -57,9 +59,23 @@ function TachesPage() {
 
 
     if (error) {
-        return <div>Error: {error.message}</div>;
+        return (
+            <section className="py-5 container">
+                <center>
+                    <Alert variant='danger'>
+                        Error: {error.message}
+                    </Alert>
+                </center>
+            </section>)
+
+            ;
     } else if (!isLoaded) {
-        return <div>Loading...</div>;
+        return (
+            <section className="py-5 container">
+                <center>
+                    <Spinner animation="border" variant="info" />
+                </center>
+            </section>);
     } else {
         return (
 
