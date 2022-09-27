@@ -13,7 +13,7 @@ function HomePage() {
         <div className="row py-lg-5">
           <div className="col-lg-6 col-md-8 mx-auto">
             <h1 className="fw-light">Crypto Studi</h1>
-            <p className="lead text-muted">Suivi de portefeuil de vos crypto actifs.</p>
+            <p className="lead text-muted">Suivez votre portefeuille de crypto actifs.</p>
             <p>
               <Link to="/actifs" className="btn btn-primary my-2">Consulter vos actifs</Link>
 
