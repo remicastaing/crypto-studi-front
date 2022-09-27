@@ -7,18 +7,22 @@ import { Link } from 'react-router-dom';
 
 function HomePage() {
   return (
-    <section className="py-5 text-center container">
-      <div className="row py-lg-5">
-        <div className="col-lg-6 col-md-8 mx-auto">
-          <h1 className="fw-light">Lalalist</h1>
-          <p className="lead text-muted">Mettez vos taches en musiques.</p>
-          <p>
-            <Link to="/listes" className="btn btn-primary my-2">Consulter les listes</Link>
+    <div className="d-flex flex-column h-100">
+      <div className="p-2 flex-fill"></div>
+      <section className="py-5 text-center container">
+        <div className="row py-lg-5">
+          <div className="col-lg-6 col-md-8 mx-auto">
+            <h1 className="fw-light">Crypto Studi</h1>
+            <p className="lead text-muted">Suivi de portefeuil de vos crypto actifs.</p>
+            <p>
+              <Link to="/actifs" className="btn btn-primary my-2">Consulter vos actifs</Link>
 
-          </p>
+            </p>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+      <div className="p-2 flex-fill"></div>
+    </div>
   );
 }
 

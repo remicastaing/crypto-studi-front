@@ -6,24 +6,17 @@ import {
 } from "react-router-dom";
 
 
-
-import Navigation from './components/navigation'
-import { UserContext , getUser} from "./services/auth";
 import Routeur from './routeur'
 import reportWebVitals from './reportWebVitals';
 
 
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <UserContext.Provider value={getUser()}>
-    <React.StrictMode>
-      <BrowserRouter>
-        <Navigation />
-        <Routeur />
-      </BrowserRouter>
-    </React.StrictMode >
-  </UserContext.Provider>
+  <React.StrictMode>
+    <BrowserRouter>
+      <Routeur />
+    </BrowserRouter>
+  </React.StrictMode >
 );
 
 // If you want to start measuring performance in your app, pass a function
