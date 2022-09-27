@@ -100,7 +100,6 @@ function AdminPage() {
           <div className='flex-fill text-center'>Ajouter une transaction</div>
           <div className=''>
             <BsXLg className="invisible" />
-
           </div>
         </div>
         <div className='flex-fill'> </div>

@@ -4,6 +4,7 @@ import Alert from 'react-bootstrap/Alert';
 
 import './home.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { BsXLg } from "react-icons/bs";
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import { APIService } from "../services/api";
@@ -52,7 +53,7 @@ function EvolutionPage() {
       cotation: parseFloat(c.cotation),
       gain: parseFloat(c.gain),
       quantite: parseFloat(c.quantite),
-      valuation : parseFloat(c.valuation)
+      valuation: parseFloat(c.valuation)
     }
   }
 
@@ -62,12 +63,12 @@ function EvolutionPage() {
         (result) => {
           setIsLoaded(true);
           var dates = result.map(c => c.date).filter((v, i, a) => a.indexOf(v) === i).map(d => new Date(d));
-          result  = result.map(parseCumul)
+          result = result.map(parseCumul)
 
           var cryptos = result.map(c => c.crypto).filter((v,
             i, a) => a.indexOf(v) === i);
           setCryptos(['Toutes', ...cryptos]);
-          
+
           setDates(dates);
           setData(result);
         },
@@ -82,7 +83,7 @@ function EvolutionPage() {
     var filteredData = []
     if (choix === 'Toutes') {
       dates.forEach(date => {
-        var cumul = data.filter(v => v.date.getTime() === date.getTime()).reduce((p, c) => {return {x: date, y: p.y + c.gain}}, {x: date, y: 0});
+        var cumul = data.filter(v => v.date.getTime() === date.getTime()).reduce((p, c) => { return { x: date, y: p.y + c.gain } }, { x: date, y: 0 });
         filteredData.push(cumul)
       });
     } else {
@@ -130,8 +131,18 @@ function EvolutionPage() {
 
   return (
     <div className="d-flex flex-column h-100">
+      <div className='d-flex flex-row p-3'>
+        <div className=''>
+          <Link to="/actifs" ><BsXLg />
+          </Link>
+        </div>
+        <div className='flex-fill text-center'>Evolution des gains</div>
+        <div className=''>
+          <BsXLg className="invisible" />
+        </div>
+      </div>
       <div className="p-2 flex-fill"></div>
-      {isLoaded? <Chart type='line' data={dataSets} options={options} /> : <Spinner/>}
+      {isLoaded ? <Chart type='line' data={dataSets} options={options} /> : <Spinner />}
       <Form.Select aria-label="Default select example" onChange={e => {
         setChoix(e.target.value);
       }}>
@@ -141,7 +152,7 @@ function EvolutionPage() {
       </Form.Select>
       <Link to="/actifs" className="btn btn-primary my-2">Consulter vos actifs</Link>
       <div className="p-2 flex-fill"></div>
-      {error? <Alert variant='warning'>{error}</Alert> : ''}
+      {error ? <Alert variant='warning'>{error}</Alert> : ''}
     </div>
   );
 }
