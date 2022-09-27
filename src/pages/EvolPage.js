@@ -152,7 +152,6 @@ function EvolutionPage() {
           <option key={crypto}>{crypto}</option>
         ))}
       </Form.Select>
-      <Link to="/actifs" className="btn btn-primary my-2">Consulter vos actifs</Link>
       <div className="p-2 flex-fill"></div>
       {error ? <Alert variant='warning'>{error}</Alert> : ''}
     </div>
