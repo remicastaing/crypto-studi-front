@@ -114,7 +114,7 @@ function TransactionPage() {
       </Navbar>
       <IconContext.Provider value={{ color: "white" }}>
 
-        <div className='d-flex flex-column p-3 h-100'>
+        <div className='d-flex flex-column p-3 h-100 mt-5' >
 
           <div className='flex-fill'> </div>
           <div className='flex-fill'>
