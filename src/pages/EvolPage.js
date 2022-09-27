@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Spinner from 'react-bootstrap/Spinner';
+import Alert from 'react-bootstrap/Alert';
 
 import './home.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -129,7 +131,7 @@ function EvolutionPage() {
   return (
     <div className="d-flex flex-column h-100">
       <div className="p-2 flex-fill"></div>
-      <Chart type='line' data={dataSets} options={options} />
+      {isLoaded? <Chart type='line' data={dataSets} options={options} /> : <Spinner/>}
       <Form.Select aria-label="Default select example" onChange={e => {
         setChoix(e.target.value);
       }}>
@@ -139,7 +141,7 @@ function EvolutionPage() {
       </Form.Select>
       <Link to="/actifs" className="btn btn-primary my-2">Consulter vos actifs</Link>
       <div className="p-2 flex-fill"></div>
-
+      {error? <Alert variant='warning'>{error}</Alert> : ''}
     </div>
   );
 }

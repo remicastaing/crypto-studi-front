@@ -9,7 +9,7 @@ import Navbar from 'react-bootstrap/Navbar';
 
 import TransactionForm from "./TransactionForm";
 
-
+import Alert from 'react-bootstrap/Alert';
 import Modal from 'react-bootstrap/Modal';
 
 
@@ -32,7 +32,7 @@ const parseTransaction = (t) => {
 function TransactionPage() {
 
   const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
+
   const [transactions, setTransactions] = useState([]);
   const [cotations, setCotations] = useState([]);
 
@@ -44,13 +44,11 @@ function TransactionPage() {
     APIService.getTransaction()
       .then(
         (result) => {
-          setIsLoaded(true);
           result = result.map(parseTransaction);
           result = result.sort((a, b) => b.date - a.date);
           setTransactions(result);
         },
         (error) => {
-          setIsLoaded(true);
           setError(error);
         }
       )
@@ -144,6 +142,7 @@ function TransactionPage() {
           <TransactionForm transaction={transaction} cotations={cotations} update={updateTransaction} deleteCb={deleteTransaction} />
         </Modal.Body>
       </Modal>
+      {error? <Alert variant='warning'>{error}</Alert> : ''}
     </>
   );
 }

@@ -15,6 +15,7 @@ import { APIService } from "../services/api";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
+import Alert from 'react-bootstrap/Alert';
 
 import moment from 'moment';
 
@@ -22,7 +23,6 @@ function AdminPage() {
 
   const navigate = useNavigate();
   const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
   const [cotation, setCotation] = useState([]);
   const [cryptoList, setCryptoList] = useState([]);
 
@@ -52,7 +52,6 @@ function AdminPage() {
     APIService.getCotation()
       .then(
         (result) => {
-          setIsLoaded(true);
           result  = result.map(parseCotation);
           setCotation(result);
           var cryptoList = result.map(c => c.crypto).filter((v,
@@ -60,7 +59,6 @@ function AdminPage() {
           setCryptoList(cryptoList);
         },
         (error) => {
-          setIsLoaded(true);
           setError(error);
         }
       )
@@ -129,6 +127,7 @@ function AdminPage() {
         </div>
         <div className='flex-fill text-center'> <Button  className="btn text-white bg-dark btn-outline-light my-2" onClick={submitTransaction} disabled={disabled}>Enregistrer une transaction</Button></div>
       </div>
+      {error? <Alert variant='warning'>{error}</Alert> : ''}
     </IconContext.Provider>
   );
 }
