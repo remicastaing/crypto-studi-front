@@ -59,14 +59,14 @@ function ActifsPage() {
         <Navbar bg="dark" variant="dark" fixed="top" >
 
           <div className="container-fluid">
-            <Link className="navbar-brand" to="/transaction" >
+            <Link id='goto-transaction' className="navbar-brand" to="/transaction" >
               <BsJournalText size={30} color={"blue"} />
             </Link>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>
             <div className="justify-content-right">
-              <Link to="/administration" >
+              <Link id='goto-administration' to="/administration" >
                 <IconStack>
                   <BsCircle size={34} color={"grey"} />
                   <BsPlus size={34} color={"blue"} style={{ position: 'absolute', zIndex: 99 }} />
@@ -78,7 +78,7 @@ function ActifsPage() {
 
         <div className='d-flex flex-column p-3 h-100'>
           <div></div>
-          <h1 className=' text-center m-5' color={"grey"}><Link to="/evolution" style={{ textDecoration: 'none', color: 'grey' }}> <Blue>{total > 0 ? '+' : '-'}</Blue>{Math.abs(total).toLocaleString('fr-FR', {
+          <h1  className=' text-center m-5' color={"grey"}><Link id="total" to="/evolution" style={{ textDecoration: 'none', color: 'grey' }}> <Blue>{total > 0 ? '+' : '-'}</Blue>{Math.abs(total).toLocaleString('fr-FR', {
             style: 'currency',
             currency: 'EUR',
           })} </Link></h1>

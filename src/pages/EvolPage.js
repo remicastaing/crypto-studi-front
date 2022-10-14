@@ -135,7 +135,7 @@ function EvolutionPage() {
     <div className="d-flex flex-column h-100">
       <div className='d-flex flex-row p-3'>
         <div className=''>
-          <Link to="/actifs" ><BsXLg />
+          <Link id='back' to="/actifs" ><BsXLg />
           </Link>
         </div>
         <div className='flex-fill text-center'>Evolution des gains</div>

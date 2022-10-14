@@ -94,7 +94,7 @@ function AdminPage() {
       <div className='d-flex flex-column p-3 h-100'>
         <div className='d-flex flex-row p-3'>
           <div className=''>
-            <Link to="/actifs" ><BsXLg />
+            <Link id='back' to="/actifs" ><BsXLg />
             </Link>
           </div>
           <div className='flex-fill text-center'>Ajouter une transaction</div>
@@ -106,25 +106,25 @@ function AdminPage() {
         <div className='flex-fill'>
           <InputGroup className="mb-5">
             <InputGroup.Text className='text-white bg-dark'><FaCalendar /></InputGroup.Text>
-            <Form.Control type="date" id="inlineFormInputGroup" placeholder="date" className='text-white bg-dark' defaultValue={defaultDate} onChange={(e) => setDate(e.target.value)}/>
+            <Form.Control id="date-input" type="date"  placeholder="date" className='text-white bg-dark' defaultValue={defaultDate} onChange={(e) => setDate(e.target.value)}/>
           </InputGroup>
           <InputGroup className="mb-5">
             <InputGroup.Text className='text-white bg-dark'><FaSearch /></InputGroup.Text>
-            <Form.Select aria-label="Default select example" className='text-white bg-dark' onChange={selectCrypto} >
+            <Form.Select id="crypto-input" aria-label="Default select example" className='text-white bg-dark' onChange={selectCrypto} >
               <option className="text-black-50">Sélectionner une crypto</option>
               {cryptoList.map(c => (<option key={c} value={c}>{c}</option>))}
             </Form.Select>
           </InputGroup>
           <InputGroup className="mb-5">
             <InputGroup.Text className='text-white bg-dark'><FaCoins /></InputGroup.Text>
-            <Form.Control id="inlineFormInputGroup" placeholder="Quantité" className='text-white bg-dark' onChange={(e) => setQuantite(e.target.value)}/>
+            <Form.Control id="quantite-input" placeholder="Quantité" className='text-white bg-dark' onChange={(e) => setQuantite(e.target.value)}/>
           </InputGroup>
           <InputGroup className="mb-5">
             <InputGroup.Text className='text-white bg-dark'><FaEuroSign /></InputGroup.Text>
-            <Form.Control id="inlineFormInputGroup" placeholder="Prix d'prix" className='text-white bg-dark' defaultValue={defaultPrix} onChange={(e) => setPrix(e.target.value)}/>
+            <Form.Control id="prix-input" placeholder="Prix d'prix" className='text-white bg-dark' defaultValue={defaultPrix} onChange={(e) => setPrix(e.target.value)}/>
           </InputGroup>
         </div>
-        <div className='flex-fill text-center'> <Button  className="btn text-white bg-dark btn-outline-light my-2" onClick={submitTransaction} disabled={disabled}>Enregistrer une transaction</Button></div>
+        <div className='flex-fill text-center'> <Button  id="submit" className="btn text-white bg-dark btn-outline-light my-2" onClick={submitTransaction} disabled={disabled}>Enregistrer une transaction</Button></div>
       </div>
       {error? <Alert variant='warning'>{error}</Alert> : ''}
     </IconContext.Provider>
