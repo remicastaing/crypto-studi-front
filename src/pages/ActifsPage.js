@@ -78,7 +78,7 @@ function ActifsPage() {
 
         <div className='d-flex flex-column p-3 h-100'>
           <div></div>
-          <h1  className=' text-center m-5' color={"grey"}><Link id="total" to="/evolution" style={{ textDecoration: 'none', color: 'grey' }}> <Blue>{total > 0 ? '+' : '-'}</Blue>{Math.abs(total).toLocaleString('fr-FR', {
+          <h1 className=' text-center m-5' color={"grey"}><Link id="total" to="/evolution" style={{ textDecoration: 'none', color: 'grey' }}> <Blue>{total > 0 ? '+' : '-'}</Blue>{Math.abs(total).toLocaleString('fr-FR', {
             style: 'currency',
             currency: 'EUR',
           })} </Link></h1>
@@ -89,7 +89,7 @@ function ActifsPage() {
                 valuation.map((v, i) => (
                   <tr key={i}>
                     <td>{v.crypto} ({v.nom})</td>
-                    <td>{Math.abs(v.change) < 5 ? <BsArrowRight /> : (v.change > 0 ? <BsArrowUpRight /> : <BsArrowDownRight />)}</td>
+                    <td>{Math.abs(v.change) < 1 ? <BsArrowRight /> : (v.change > 0 ? <BsArrowUpRight /> : <BsArrowDownRight />)}</td>
                   </tr>
                 ))
               }
